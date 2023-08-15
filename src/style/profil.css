@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  overflow: hidden;
+  background: url("../../public/Premium Photo _ Assortment of coffee beans on white surface 2.png");
+}
+
+.container {
+  background: #fff;
+  width: 700px;
+  height: 400px;
+  margin-left: 40%;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #000;
+  border: solid 5px black;
+  border-radius: 5px;
+}
+
+.profilBorder {
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+}
+
+.navbar img {
+  position: absolute;
+  left: 0;
+  top: -50px;
+}
+
+.navbar {
+  background: #482e1d;
+  display: flex;
+  height: 110px;
+  align-items: center;
+  justify-content: space-around;
+  top: 0;
+  width: 110%;
+  position: fixed;
+  z-index: 1;
+}
+
+input[type="submit"] {
+  padding: 5px;
+  background: #482e1d;
+  color: #fff;
+}
+input[type="file"] {
+  padding: 5px;
+  background: #482e1d;
+  color: #fff;
+}

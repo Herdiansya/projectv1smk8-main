@@ -1,0 +1,48 @@
+  echo "<h3>" . $row["item_name"] . "</h3>";
+      echo "<p>Price: $" . $row["price"] . "</p>";
+      echo "<img src='" . $row["image_path"] . "' alt='" . $row["item_name"] . "'>";
+      echo "</div>";
+
+
+      <!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Gallery</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+
+<h2>Menu Gallery</h2>
+
+<?php
+// Database connection
+$conn = new mysqli("localhost", "username", "password", "restaurant");
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve menu items from the database
+$query = "SELECT id, item_name, description, price, image_path FROM menu";
+$result = $conn->query($query);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<div class='menu-item'>";
+        echo "<img class='menu-image' src='" . $row["image_path"] . "' alt='" . $row["item_name"] . "'>";
+        echo "<div class='menu-name'>" . $row["item_name"] . "</div>";
+        echo "<div class='menu-description'>" . $row["description"] . "</div>";
+        echo "<div>Price: $" . $row["price"] . "</div>";
+        echo "</div>";
+    }
+} else {
+    echo "No menu items available.";
+}
+
+$conn->close();
+?>
+
+</body>
+</html>
