@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verify password
     if (password_verify($password, $hashedPassword)) {
+        $_SESSION["authenticated"] = true;
         $_SESSION["user_id"] = $userId;
         header("Location: ../components/displaymenu.php"); // Redirect to displaymenu after successful login
     } else {

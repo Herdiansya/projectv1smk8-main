@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION["authenticated"])) {
+  // Redirect user to login page if not authenticated
+  header("Location: ./seccurity.php");
+  exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>

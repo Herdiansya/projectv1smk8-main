@@ -1,5 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["authenticated"])) {
+  // Redirect user to login page if not authenticated
+  header("Location: ./seccurity.php");
+  exit();
+}
+
 require 'config.php';
+
 
 if(isset($_POST["uploadd"])){
     if(destt($_POST) > 0){
@@ -30,9 +38,9 @@ if(isset($_POST["uploadd"])){
     </nav>
     <h2 style="position:absolute; top:130px; left:600px;">Tambah Menu</h2>
     <div class="navbar2" style="width:150px; height:83%; background:#F1E4D6; position:absolute; left:0; top:100px; display:flex;  flex-direction:column; align-items:center; justify-content: space-around; position:fixed;">
-    <a href="./displaymenu.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px;">Home</button></a>
-    <a href="#"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Histori</button></a>
-    <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Data Menu</button></a>
+    <a href="./displaymenu.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px; cursor:pointer;">Home</button></a>
+    <a href="./history.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Histori</button></a>
+    <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Data Menu</button></a>
 </div>
     <div class="container">
       <form action="" method="post">

@@ -1,4 +1,11 @@
 <?php
+
+if (!isset($_SESSION["authenticated"])) {
+    // Redirect user to login page if not authenticated
+    header("Location: ../../index.php");
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
     $name = $_POST["name"];

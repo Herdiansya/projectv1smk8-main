@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION["authenticated"])) {
+  // Redirect user to login page if not authenticated
+  header("Location: ./seccurity.php");
+  exit();
+}
 
 $server = "localhost";
 $user = "root";
@@ -6,6 +12,7 @@ $pass = "";
 $database = "projectv1smk8";
  
 $conn = mysqli_connect($server, $user, $pass, $database);
+
 
 
 if(isset($_POST['order_btn'])){

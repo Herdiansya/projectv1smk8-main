@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION["authenticated"])) {
+  // Redirect user to login page if not authenticated
+  header("Location: ./seccurity.php");
+  exit();
+}
 
 $conn = mysqli_connect("localhost", "root", "", "projectv1smk8");
 
@@ -50,12 +56,12 @@ if(isset($_POST['add'])){
         <option value="food">Makanan</option>
         <option value="drink">Minuman</option>
       </select>
-      <button type="submit" class="filter-btn">Filter</button>
+      <button type="submit" class="filter-btn" style="cursor:pointer;">Filter</button>
     </form>
     <div class="navbar3" style="width:500px; height:100px; background:#b28a6f; position:absolute; right:0; top:90px; display:flex;  align-items:center; justify-content: space-around; position:fixed;">
-      <a href=""><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px;">Histori</button></a>
-      <a href="./addmenu.php"><button type="submit" class="filter-btn3" style="background: #301607; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Tambah Menu</button></a>
-      <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Data Menu</button></a>
+      <a href="./history.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px; cursor:pointer;">Histori</button></a>
+      <a href="./addmenu.php"><button type="submit" class="filter-btn3" style="background: #301607; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Tambah Menu</button></a>
+      <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Data Menu</button></a>
     </div>
     <?php
 // Database connection
@@ -80,13 +86,13 @@ if ($result->num_rows > 0) {
   <form method="post" action="displaymenu.php?id=<?= $row['id']?>" >
     <img class='menu-image' src="../../public/<?= $row['image_path'] ?>" alt=<?= $row["item_name"]?>>
     <h5 class="menu-name"><?= $row['item_name']?></h5>
-    <h5>Price: <?= $row['price']?></h5>
+    <h5>Price:Rp <?= $row['price']?></h5>
     <input type="hidden" name="menu" value="<?= $row['item_name']?>">
     <input type="hidden" name="harga" value="<?= $row['price']?>">
     <input type="hidden" name="category" value="<?= $row['category']?>">
     <input type="hidden" name="image" value="<?= $row['image_path']?>">
     <input type="hidden" name="quantity" value="<?= $row['quantity']?>">
-    <button type='submit' class='tambah-btn'  name="add">Tambah Ke Keranjang</button>
+    <button type='submit' class='tambah-btn'  name="add" style="cursor:pointer">Tambah Ke Keranjang</button>
   </form>
 </div>
     <?php

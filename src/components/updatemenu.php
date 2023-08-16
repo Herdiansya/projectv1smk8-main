@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION["authenticated"])) {
+  // Redirect user to login page if not authenticated
+  header("Location: ./seccurity.php");
+  exit();
+}
+
   require 'config.php';
 
     $id = $_GET["id"];
