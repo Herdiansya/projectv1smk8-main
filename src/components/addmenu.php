@@ -1,3 +1,19 @@
+<?php
+require 'config.php';
+
+if(isset($_POST["uploadd"])){
+    if(destt($_POST) > 0){
+        echo "<script>
+           alert ('Data Berhasil Ditambahkan')
+          </script>";
+    }else{
+        echo "<script>
+           alert ('Data Gagal  Ditambahkan')
+          </script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,10 +32,10 @@
     <div class="navbar2" style="width:150px; height:83%; background:#F1E4D6; position:absolute; left:0; top:100px; display:flex;  flex-direction:column; align-items:center; justify-content: space-around; position:fixed;">
     <a href="./displaymenu.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px;">Home</button></a>
     <a href="#"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Histori</button></a>
-    <a href="#"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Data Menu</button></a>
+    <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Data Menu</button></a>
 </div>
     <div class="container">
-      <form action="../logic/addmenu.php" method="post" enctype="multipart/form-data">
+      <form action="" method="post">
         <div>
           <label for="item_name" style="margin-right:50px;">Item Name:</label>
           <input type="text" id="item_name" name="item_name" required  style="background:#482E1D; color:#fff; padding:10px; border-radius:51px; width:300px;" />
@@ -39,10 +55,10 @@
         </div>
         <div>
           <label for="image" style="margin-right:70px;">Image:</label>
-          <input type="file" id="image" name="image" accept="image/*" required />
+          <input type="file" id="image" name="image" required />
         </div>
         <div>
-          <button type="submit" style="padding:10px; background: #482E1D; color:#fff; border-radius:10px; ">Add Item</button>
+          <button type="submit" style="padding:10px; background: #482E1D; color:#fff; border-radius:10px; " name="uploadd">Add Item</button>
         </div>
       </form>
     </div>

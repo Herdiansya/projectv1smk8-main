@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Menu Item</title>
+</head>
+<body>
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "projectv1smk8";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
+    $itemId = $_GET["id"];
+
+    // Fetch menu item details
+    $fetchSql = "SELECT id, item_name, price FROM menu WHERE id = $itemId";
+    $result = $conn->query($fetchSql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $productId = $row["id"];
+        $productName = $row["item_name"];
+        $price = $row["price"];
+    } else {
+        echo "Menu item not found.";
+        $conn->close();
+        exit;
+    }
+} else {
+    echo "Invalid request.";
+    $conn->close();
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $newProductName = $_POST["productname"];
+    $newPrice = $_POST["price"];
+
+    // Update menu item in the database
+    $updateSql = "UPDATE menu SET item_name = '$newProductName', price = '$newPrice', WHERE id = $itemId";
+    if ($conn->query($updateSql) === TRUE) {
+        echo "Menu item updated successfully!";
+    } else {
+        echo "Error updating menu item: " . $conn->error;
+    }
+}
+
+$conn->close();
+?>
+
+<h2>Update Menu Item</h2>
+
+<form method="post">
+    <input type="hidden" name="id" value="<?php echo $productId; ?>">
+    <label for="productname">Product Name:</label>
+    <input type="text" id="product_name" name="productname" value="<?php echo $productName; ?>" required>
+    <br>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" value="<?php echo $price; ?>" required>
+    <br>
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>

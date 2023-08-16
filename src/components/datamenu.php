@@ -1,3 +1,10 @@
+<?php
+require 'config.php';
+
+$record = seterah("SELECT * FROM menu");
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +23,7 @@
             width: 80%;
             margin: auto;
             margin-top: 200px;
-            margin-left: 200px;
+            margin-left: 200px; 
             box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.57);
             background:#fff;
         }
@@ -44,6 +51,7 @@
             padding: 5px 10px;
             cursor: pointer;
             font-size:30px;
+            border:none;
         }
 
         .update-btn {
@@ -54,6 +62,7 @@
         .delete-btn {
             background-color: #fff;
             color: #000;
+            margin-right:-40px;
         }
         .menu-image{
             position: relative;
@@ -70,48 +79,27 @@
     </nav>
     <div class="navbar2" style="width:130px; height:83%; background:#F1E4D6; position:absolute; left:0; top:100px; display:flex;  flex-direction:column; align-items:center; justify-content: space-around; position:fixed;">
     <a href="./displaymenu.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px; cursor:pointer;">Home</button></a>
-    <a href="./addmenu"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Tambah Menu</button></a>
+    <a href="./addmenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Tambah Menu</button></a>
     <a href="#"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">History</button></a>
 </div>
 <h2 style="position:absolute; left:50%; top:25%; font-size:2rem;">Data Menu</h2>
-
-<?php
-// Database connection
-$conn = new mysqli("localhost", "root", "", "projectv1smk8");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch menu items from the database
-$sql = "SELECT id, item_name, price, category, image_path FROM menu";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo "<table>";
-    echo "<tr><th>ID</th><th>Image</th><th>Produk</th><th>Harga</th><th>Category</th><th>Action</th></tr>";
-
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td><img class='menu-image' src='" . $row["image_path"] . "' alt='" . $row["item_name"] . "' width='80px'></td>";
-        echo "<td>" . $row["item_name"] . "</td>";
-        echo "<td>Rp" . $row["price"] . "</td>";
-        echo "<td>" . $row["category"] . "</td>";
-        echo '<td class="btn-container">';
-        echo '<a class="update-btn" href="update_menu.php?id=' . $row["id"] . '"><i class="bi bi-pencil-fill"></i></a>';
-        echo '<a class="delete-btn" href="delete_menu.php?id=' . $row["id"] . '"><i class="bi bi-trash3-fill"></i></a>';
-        echo '</td>';
-        echo "</tr>";
-    }
-
-    echo "</table>";
-} else {
-    echo "No menu items found.";
-}
-
-$conn->close();
-?>
-
+<table>
+            <<tr><th>ID</th><th>Image</th><th>Produk</th><th>Harga</th><th>Category</th><th>Action</th></tr>
+            <?php $i = 1;?>
+            <?php foreach($record as $rcd):?>
+            <tr>
+                <td><?= $i?></td>
+                <td><img src="../../public/<?= $rcd["image_path"]?>" width="80px" class="menu-image"></td>
+                <td><?= $rcd["item_name"]?></td>
+                <td><?= $rcd["price"]?></td>
+                <td><?= $rcd["category"]?></td>
+                <td>
+                <a href="./updatemenu.php?id=<?= $rcd["id"]?>"><button type="button" class="update-btn"><i class="bi bi-pencil-fill"></i></button></a>
+                <a href="../logic/deletemenu.php?id=<?= $rcd["id"]?>"><button type="button" class="delete-btn"><i class="bi bi-trash3-fill"></i></button></a>
+                </td>
+            </tr>
+            <?php $i++;?>
+            <?php endforeach;?>
+        </table>
 </body>
 </html>

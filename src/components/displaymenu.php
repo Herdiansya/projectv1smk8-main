@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,9 +32,9 @@
       <button type="submit" class="filter-btn">Filter</button>
     </form>
     <div class="navbar3" style="width:500px; height:100px; background:#b28a6f; position:absolute; right:0; top:90px; display:flex;  align-items:center; justify-content: space-around; position:fixed;">
-    <a href=""><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px;">Histori</button></a>
-    <a href="./addmenu.php"><button type="submit" class="filter-btn3" style="background: #301607; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Tambah Menu</button></a>
-    <a href=""><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Data Menu</button></a>
+      <a href=""><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px;">Histori</button></a>
+      <a href="./addmenu.php"><button type="submit" class="filter-btn3" style="background: #301607; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Tambah Menu</button></a>
+      <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px;">Data Menu</button></a>
     </div>
     <?php
 // Database connection
@@ -52,13 +54,19 @@ $result = $conn->query($query);
 $bgcolor = "#fff";
 $color = "#000";
 if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    echo "<div class='menu-item'>";
-    echo "<img class='menu-image' src='" . $row["image_path"] . "' alt='" . $row["item_name"] . "'>";
-    echo "<div class='menu-name'>" . $row["item_name"] . "</div>";
-    echo "<div class='menu-price'>Price: $" . $row["price"] . "</div>";
-    echo "<button type='submit' class='tambah-btn' onclick='incrementCardNumber()'>Tambah Ke Keranjang</button>";
-    echo "</div>";
+  while ($row = mysqli_fetch_array($result)) {?>
+  <form action="./checkout.php?id=<?= $row['id']?>" method="post">
+    <div class='menu-item'>
+    <img class='menu-image' src="../../public/<?= $row['image_path'] ?>" alt=<?= $row["item_name"]?>>
+    <h5 class="menu-name"><?= $row['item_name']?></h5>
+    <h5>Price: <?= $row['price']?></h5>
+    <input type="hidden" name="menu" value="<?= $row['item_name']?>">
+    <input type="hidden" name="harga" value="<?= $row['price']?>">
+    <input type="number" name="quantity" value= "1" >
+    <button type='submit' class='tambah-btn' onclick='incrementCardNumber()' name="add-to-card">Tambah Ke Keranjang</button>
+    </div>
+  </form>
+    <?php
   }
 } else {
   echo "Tidak ada menu yang tersedia.";
