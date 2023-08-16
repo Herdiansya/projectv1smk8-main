@@ -1,5 +1,27 @@
+<?php
 
+$conn = mysqli_connect("localhost", "root", "", "projectv1smk8");
 
+if(isset($_POST['add'])){
+
+  $product_name = $_POST['menu'];
+  $product_price = $_POST['harga'];
+  $product_category = $_POST['category'];
+  $product_image = $_POST['image'];
+  $product_quantity = 1;
+
+  $select_cart = mysqli_query($conn, "SELECT * FROM `menu` WHERE item_name = '$product_name'");
+
+  if(mysqli_num_rows($select_cart) > 0){
+     $message[] = 'product already added to cart';
+  }else{
+     $insert_product = mysqli_query($conn, "INSERT INTO `menu`(item_name, price, category, image_path, quantity) VALUES('$product_name', '$product_price', '$product_category', '$product_image', '$product_quantity')");
+     $message[] = 'product added to cart succesfully';
+  }
+
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,8 +37,7 @@
           <input type="text" id="search" name="search" style="background: #482e1d; border-color:white; padding:5px; width:200px; border-radius:20px; color:#fff; cursor:pointer; transition: border 0.3s,background 0.3s;"/>
           <button type="submit" class="search-btn"><i class="bi bi-search"></i></button>
         </form>
-        <div id="cardNumber" style="position:absolute; color:#fff; left:68rem; background:green; padding:3px; border-radius:5px;">0</div>
-        <i class="bi bi-cart-fill" style="color:white; font-size:30px; cursor:pointer;"></i>
+        <a href="./cart.php"><i class="bi bi-cart-fill" style="color:white; font-size:30px; cursor:pointer;"></i></a>
         <a href="./profil.php"><i class="bi bi-person-circle" style="color:white; font-size:30px; cursor:pointer;"></i></a>
       </div>
     </nav>
@@ -49,23 +70,25 @@ $category_filter = isset($_GET["category_filter"]) ? $_GET["category_filter"] : 
 $filter_query = ($category_filter !== "all") ? " WHERE category = '$category_filter'" : "";
 
 // Retrieve menu items from the database
-$query = "SELECT id, item_name, price, image_path FROM menu" . $filter_query;
+$query = "SELECT id, item_name, price, category, image_path, quantity FROM menu" . $filter_query;
 $result = $conn->query($query);
 $bgcolor = "#fff";
 $color = "#000";
 if ($result->num_rows > 0) {
   while ($row = mysqli_fetch_array($result)) {?>
-  <form action="./checkout.php?id=<?= $row['id']?>" method="post">
     <div class='menu-item'>
+  <form method="post" action="displaymenu.php?id=<?= $row['id']?>" >
     <img class='menu-image' src="../../public/<?= $row['image_path'] ?>" alt=<?= $row["item_name"]?>>
     <h5 class="menu-name"><?= $row['item_name']?></h5>
     <h5>Price: <?= $row['price']?></h5>
     <input type="hidden" name="menu" value="<?= $row['item_name']?>">
     <input type="hidden" name="harga" value="<?= $row['price']?>">
-    <input type="number" name="quantity" value= "1" >
-    <button type='submit' class='tambah-btn' onclick='incrementCardNumber()' name="add-to-card">Tambah Ke Keranjang</button>
-    </div>
+    <input type="hidden" name="category" value="<?= $row['category']?>">
+    <input type="hidden" name="image" value="<?= $row['image_path']?>">
+    <input type="hidden" name="quantity" value="<?= $row['quantity']?>">
+    <button type='submit' class='tambah-btn'  name="add">Tambah Ke Keranjang</button>
   </form>
+</div>
     <?php
   }
 } else {
@@ -74,15 +97,5 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 ?>
-
-<script>
-    let currentCardNumber = 0;
-
-    function incrementCardNumber() {
-
-        currentCardNumber++;
-        document.getElementById("cardNumber").textContent = currentCardNumber.toString().padStart(1, '0');
-    }
-</script>
   </body>
 </html>

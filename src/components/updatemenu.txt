@@ -71,3 +71,6 @@ $conn->close();
 
 </body>
 </html>
+
+
+onclick='incrementCardNumber()'

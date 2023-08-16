@@ -44,10 +44,11 @@ function destt($destinasi){
     $price = htmlspecialchars($destinasi["price"]);
     $category = htmlspecialchars($destinasi["category"]);
     $gambar = htmlspecialchars($destinasi["image"]);
+    $product_quantity = 1;
 
     $query = "INSERT INTO menu
               VALUES 
-              ('', '$nama', '$price', '$category', '$gambar')";
+              ('', '$nama', '$price', '$category', '$gambar', '$product_quantity')";
 
     mysqli_query($conn,$query);
 
