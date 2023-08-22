@@ -68,6 +68,9 @@ if(isset($_POST['order_btn'])){
             <p style='color:white;'> No Meja : <span style='color:white;'>".$number."</span> </p>
             <p style='color:white;'> Metode Pembayaran : <span style='color:white;'>".$method."</span> </p>
          </div>
+            <a href='./displaymenu.php' class='btn' style='background-color: #ffa500;'>Print</a>
+         </div>
+         </div>
             <a href='./displaymenu.php' class='btn' style='background-color: #ffa500;'>continue shopping</a>
          </div>
       </div>

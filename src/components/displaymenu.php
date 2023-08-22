@@ -50,19 +50,19 @@ if(isset($_POST['add'])){
     <h1 style="text-align:center; margin-top:30px;">Daftar Menu</h1>
 
     <form action="displaymenu.php" method="get" id="form-category">
-      <label for="category_filter" id="category-text">Pilih Category:</label>
-      <select id="category_filter" name="category_filter">
+      <label for="category_filter" id="category-text" style="margin-left:200px;">Pilih Category:</label>
+      <select id="category_filter" name="category_filter" style="margin-left:200px;">
         <option value="all">All</option>
         <option value="food">Makanan</option>
         <option value="drink">Minuman</option>
       </select>
-      <button type="submit" class="filter-btn" style="cursor:pointer;">Filter</button>
+      <button type="submit" class="filter-btn" style="cursor:pointer; margin-left:200px;">Filter</button>
     </form>
-    <div class="navbar3" style="width:500px; height:100px; background:#b28a6f; position:absolute; right:0; top:90px; display:flex;  align-items:center; justify-content: space-around; position:fixed;">
-      <a href="./history.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px; cursor:pointer;">Histori</button></a>
-      <a href="./addmenu.php"><button type="submit" class="filter-btn3" style="background: #301607; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Tambah Menu</button></a>
-      <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Data Menu</button></a>
-    </div>
+    <div class="navbar3" style="width:150px; height:83%; background:#F1E4D6; position:absolute; left:0; top:100px; display:flex;  flex-direction:column; align-items:center; justify-content: space-around; position:fixed;">
+    <a href="./addmenu.php"><button type="submit" class="filter-btn2" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff;  margin-top:20px; cursor:pointer;">Tambah Menu</button></a>
+    <a href="./history.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Histori</button></a>
+    <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Data Menu</button></a>
+</div>
     <?php
 // Database connection
 $conn = new mysqli("localhost", "root", "", "projectv1smk8");
@@ -82,7 +82,7 @@ $bgcolor = "#fff";
 $color = "#000";
 if ($result->num_rows > 0) {
   while ($row = mysqli_fetch_array($result)) {?>
-    <div class='menu-item'>
+    <div class='menu-item' style="margin-left:250px;">
   <form method="post" action="displaymenu.php?id=<?= $row['id']?>" >
     <img class='menu-image' src="../../public/<?= $row['image_path'] ?>" alt=<?= $row["item_name"]?>>
     <h5 class="menu-name"><?= $row['item_name']?></h5>

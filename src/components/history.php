@@ -5,6 +5,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: url("../../public/274043 1.png");
         }
 
         h1 {
@@ -72,8 +73,13 @@ $sql = "SELECT * FROM orders";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo '<table style="margin-top:80px; margin-left:200px;">';
-    echo '<tr><th style="background-color:#482e1d; color:#fff;">Order ID</th><th style="background-color:#482e1d; color:#fff;">Product</th><th style="background-color:#482e1d; color:#fff;">Pemesan</th><th style="background-color:#482e1d; color:#fff;">No Meja</th><th style="background-color:#482e1d; color:#fff;">Metode Pembayaran</th><th style="background-color:#482e1d; color:#fff;">Total Harga</th></tr>';
+    echo '<table style="margin-top:80px; margin-left:200px; background-color:white; border-radius:20px;">';
+    echo '<tr ><th style="background-color:#482e1d; color:#fff; border-radius:20px;">Order ID</th>
+    <th style="background-color:#482e1d; color:#fff; border-radius:20px;">Product</th>
+    <th style="background-color:#482e1d; color:#fff; border-radius:20px;">Pemesan</th>
+    <th style="background-color:#482e1d; color:#fff; border-radius:20px;">No Meja</th>
+    <th style="background-color:#482e1d; color:#fff; border-radius:20px;">Metode Pembayaran</th>
+    <th style="background-color:#482e1d; color:#fff; border-radius:20px;">Total Harga</th></tr>';
     
     while ($row = $result->fetch_assoc()) {
         echo '<tr>';

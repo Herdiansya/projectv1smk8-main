@@ -56,8 +56,8 @@ $conn->close();
     <a href="./history.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Histori</button></a>
     <a href="./datamenu.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; margin-top:20px; cursor:pointer;">Data Menu</button></a>
 </div>
-<a href="../logic/logout.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; position:absolute; left:250px; top:500px; cursor:pointer;">Log Out</button></a>
-  <div class="container">
+<a href="../logic/logout.php"><button type="submit" class="filter-btn3" style="background: #482e1d; padding: 10px; width: 120px; border-radius: 10px; color: #ffff; position:absolute; left:1100px; top:550px; cursor:pointer;">Log Out</button></a>
+  <div class="container" style="margin-left:30%; border-radius:10px;">
   <h1>Welcome</h1>
   <div class="profilBorder">
     <img src="<?php echo $user_data['profile_picture']; ?>" alt="Foto Profil" width="150px" height="150px" style="object-fit:contain;">

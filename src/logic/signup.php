@@ -1,10 +1,5 @@
 <?php
 
-if (!isset($_SESSION["authenticated"])) {
-    // Redirect user to login page if not authenticated
-    header("Location: ../../index.php");
-    exit();
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
@@ -44,7 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertStmt->bind_param("sss", $id, $name, $hashedPassword);
 
         if ($insertStmt->execute()) {
-            echo "Registration successful. You can now <a href='../../index.php'>login</a>.";
+            echo " <div class='container' style='display:flex; flex-direction:column; align-items:center; justify-content:space-around; background-color:#482E1D; color:white; padding:10px; width:750px; border-radius:10px; margin:15% auto;'>
+            <h2>Login Berhasil</h2>
+            <a href='../../index.php'><button type='submit' class='filter-btn3' style='background: #feecbc; padding: 10px; width: 120px; border-radius: 10px; color: #000; cursor:pointer;'>Login</button></a>
+        </div>";
         } else {
             echo "Registration failed.";
         }
